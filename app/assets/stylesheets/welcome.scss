@@ -1,3 +1,37 @@
 // Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
+// They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.banner {
+  padding: 50px;
+  text-align: center;
+  border: 5px slategray solid;
+  width: 85vw;
+  margin: auto;
+}
+
+.btn-lg{
+  background-color: lightblue;
+  color: darkslategray;
+  margin: 20px;
+}
+
+.btn-lg:hover{
+  background-color: navy;
+  color: white;
+}
+
+.btn-lg:active{
+  color: white;
+  background-color: rebeccapurple;
+}
+
+.features{
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+h3{
+  text-align: center;
+}
