@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '5.0.2'
 
 group :production do
   gem 'pg'
@@ -32,3 +32,4 @@ gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'figaro', '1.0'
 gem 'devise'
+gem 'mailcatcher'
