@@ -16,7 +16,7 @@
 !/log/.keep
 /tmp
 
-# Ignore application configuration
+# Ignore environment variables
 /config/application.yml
 
 app/views/confirmables/
