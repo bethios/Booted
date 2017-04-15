@@ -9,7 +9,7 @@ group :production do
 end
 
 group :development do
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'pry-rails'
 end
 
@@ -32,4 +32,4 @@ gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'figaro', '1.0'
 gem 'devise'
-gem 'mailcatcher'
+#gem 'mailcatcher'
