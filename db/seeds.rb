@@ -2,8 +2,8 @@ require 'random_data'
 
 5.times do
   User.create!(
-    email: RandomData.random_word + "@gmail.com",
-    password: RandomData.random_sentence
+    email: Faker::Internet.email,
+    password: Faker::Internet.password(10, 20)
   )
 end
 
@@ -11,7 +11,7 @@ users = User.all
 
 20.times do
   Wiki.create!(
-    title: RandomData.random_sentence,
+    title: Faker::Food.ingredient,
     body: RandomData.random_paragraph,
     user: users.sample
   )

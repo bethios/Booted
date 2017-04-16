@@ -11,7 +11,8 @@ module RandomData
   def self.random_sentence
     strings = []
     rand(3..8).times do
-      strings << random_word
+      word = Faker::Food.ingredient
+      strings << word
     end
 
     sentence = strings.join(" ")
