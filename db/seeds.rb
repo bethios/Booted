@@ -2,6 +2,7 @@ require 'random_data'
 
 5.times do
   User.create!(
+    username: Faker::Internet.user_name(5..8),
     email: Faker::Internet.email,
     password: Faker::Internet.password(10, 20)
   )
@@ -20,19 +21,22 @@ end
 User.create!(
     email: 'admin@gmail.com',
     password: 'helloworld',
-    role: 'admin'
+    role: 'admin',
+    username: "admin"
 )
 
 User.create!(
     email: 'premium@gmail.com',
     password: 'helloworld',
-    role: 'premium'
+    role: 'premium',
+    username: 'premium'
 )
 
 User.create!(
     email: 'standard@gmail.com',
     password: 'helloworld',
-    role: 'standard'
+    role: 'standard',
+    username: 'standard'
 )
 
 puts "seed finished"

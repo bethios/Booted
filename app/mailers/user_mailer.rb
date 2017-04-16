@@ -5,14 +5,14 @@ class UserMailer < Devise::Mailer
 
   default from: "bethios@gmail.com"
 
-  def confirmation_instructions(user)
-    headers["Message-ID"] = "<user/#{user.id}@your-app-name.example>"
-    headers["In-Reply-To"] = "<user/#{user.id}@your-app-name.example>"
-    headers["References"] = "<user/#{user.id}@your-app-name.example>"
+  #def confirmation_instructions(user)
+  #  headers["Message-ID"] = "<user/#{user.id}@your-app-name.example>"
+  #  headers["In-Reply-To"] = "<user/#{user.id}@your-app-name.example>"
+  #  headers["References"] = "<user/#{user.id}@your-app-name.example>"
 
-    @user = user
+  #  @user = user
 
-    mail(to: user.email, subject: "Confirm your blocipedia account")
+  #  mail(to: user.email, subject: "Confirm your blocipedia account")
 
-  end
+  #end
 end
