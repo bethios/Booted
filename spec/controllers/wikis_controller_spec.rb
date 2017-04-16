@@ -28,7 +28,7 @@ RSpec.describe WikisController, type: :controller do
     end
     it "assigns my_wiki to @wiki" do
       get :show, {id: my_wiki.id}
-      expect(assign(:wiki)).to eq(my_wiki)
+      expect(assigns(:wiki)).to eq(my_wiki)
     end
   end
 
@@ -73,7 +73,7 @@ RSpec.describe WikisController, type: :controller do
 
     it "renders the #edit view" do
       get :edit, {id: my_wiki.id}
-      expect(response.to render_template :edit)
+      expect(response).to render_template :edit
     end
 
     it "assigns wiki to be updated to @wiki" do
@@ -87,19 +87,19 @@ RSpec.describe WikisController, type: :controller do
   end
 
   describe "PUT update" do
-    it "updates post with expected attributes" do
+    it "updates wiki with expected attributes" do
       new_title = RandomData.random_sentence
       new_body = RandomData.random_paragraph
 
-      put :update, id: my_wiki.id, post: {title: new_title, body: new_body}
+      put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
 
       updated_wiki = assigns(:wiki)
-      expect(updated_wiki.id).to eq my_post.id
+      expect(updated_wiki.id).to eq my_wiki.id
       expect(updated_wiki.title).to eq new_title
       expect(updated_wiki.body).to eq new_body
     end
 
-    it "redirects to the updated post" do
+    it "redirects to the updated wiki" do
       new_title = RandomData.random_sentence
       new_body = RandomData.random_paragraph
 
@@ -117,7 +117,7 @@ RSpec.describe WikisController, type: :controller do
 
     it "redirects to wiki index" do
       delete :destroy, {id: my_wiki.id}
-      expect(response).to redirect_to wiki_path
+      expect(response).to redirect_to wikis_path
     end
   end
 end
