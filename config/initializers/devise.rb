@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '7bf1fc4b824c1a821ce30193d48e12e6551d6c8649ba2d93f64b634ccffbe66d0ca2fc3ce5030d2b149e9718a0fee45a05e6c5d5250a15eaeb2ed2acfa0cd6fe'
+  # config.secret_key = '4f7fe14f45b33cd6279d9992ad53514ae2025833f0e2617b15d550c604aa2a0a17e932037dc95fb296a6d3c1b441c536667f88064d2981ed17d4b3fa12697f52'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -14,11 +14,25 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'bethios@gmail.com'
 
+
+  if Rails.env.development? || Rails.env.production?
+    ActionMailer::Base.delivery_method = :smtp
+    ActionMailer::Base.smtp_settings = {
+        address:        'smtp.sendgrid.net',
+        port:           '2525',
+        authentication: :plain,
+        user_name:      ENV['SENDGRID_USERNAME'],
+        password:       ENV['SENDGRID_PASSWORD'],
+        domain:         'heroku.com',
+        enable_starttls_auto: true
+    }
+  end
+
   # Configure the class responsible to send e-mails.
    config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
-   config.parent_mailer = 'ActionMailer::Base'
+  # config.parent_mailer = 'ActionMailer::Base'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -108,13 +122,13 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'd0ff6340f3ef707b0ff3a501bc15d993d8e652550a7d9d0fafd9028d4e4ac4f1879869e6223f479481a634d1f05742c26cd89e68712c7cd9d9e92d901763ff90'
+  # config.pepper = '61cc29a0fa7dfd2bf16b647f1ba170001676c97207d3575a0cf0a34804fc5508f37d90aabe55483837d86c5295ff1485c85bad26070b6265c330a883c6db5e3f'
 
   # Send a notification to the original email when the user's email is changed.
-  # config.send_email_changed_notification = false
+   config.send_email_changed_notification = false
 
   # Send a notification email when the user's password is changed.
-  # config.send_password_change_notification = false
+   config.send_password_change_notification = false
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -130,7 +144,7 @@ Devise.setup do |config|
   # their account can't be confirmed with the token any more.
   # Default is nil, meaning there is no restriction on how long a user can take
   # before confirming their account.
-  # config.confirm_within = 3.days
+  # config.confirm_within = 30.days
 
   # If true, requires any email changes to be confirmed (exactly the same way as
   # initial account confirmation) to be applied. Requires additional unconfirmed_email

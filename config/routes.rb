@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :wikis
-
   devise_for :users
+
+  resources :wikis
 
   get 'about' => 'welcome#about'
 
