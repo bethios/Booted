@@ -27,3 +27,18 @@
 body{
   margin: 10px;
 }
+
+.btn{
+  background-color: lightblue;
+  color: darkslategray;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  background-color: navy;
+  color: lightblue;
+}
+
+.user-info {
+  padding: 15px;
+}

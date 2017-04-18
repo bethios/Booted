@@ -8,16 +8,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="header">
-  <%= link_to "Home", root_path %> -
-  <% if user_signed_in? %>
-      Signed in as: <strong><%= current_user.email %></strong> |
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> - <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-  <% else %>
-      <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %> -
-      <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %>
-  <% end %>
-</div>
+<nav class="navbar navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to "Blocipedia", root_path, class: 'navbar-brand' %>
+    </div>
+    <ul class="nav navbar-nav">
+      <% if current_user.role == 'premium' %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Wikis
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Wikis", wikis_path %></li>
+              <li>My Wikis</li>
+            </ul>
+          </li>
+      <% else %>
+          <li><%= link_to "Wiki", wikis_path %> </li>
+      <% end %>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+          <li class="user-info"> Signed in as: <strong><%= current_user.email %></strong></li>
+          <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+      <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %></li>
+          <li><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %></li>
+      <% end %>
+    </ul>
+
+  </div>
+</nav>
 
 <% if flash[:notice] %>
     <div class="alert alert-success">
