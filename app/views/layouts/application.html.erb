@@ -14,7 +14,7 @@
       <%= link_to "Blocipedia", root_path, class: 'navbar-brand' %>
     </div>
     <ul class="nav navbar-nav">
-      <% if current_user.role == 'premium' %>
+      <% if user_signed_in? && current_user.role == 'premium' %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Wikis
               <span class="caret"></span></a>
