@@ -288,4 +288,15 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      address:        'smtp.sendgrid.net',
+      port:           '2525',
+      authentication: :plain,
+      user_name:      ENV['SENDGRID_USERNAME'],
+      password:       ENV['SENDGRID_PASSWORD'],
+      domain:         'heroku.com',
+      enable_starttls_auto: true
+  }
 end
