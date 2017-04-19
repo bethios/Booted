@@ -1,18 +1,26 @@
-<%= form_tag charges_path do %>
-    <article>
-      <% if flash[:error].present? %>
-          <div id="error_explanation">
-            <p><%= flash[:error] %></p>
-          </div>
+<div class="container">
+  <div class="col-sm-6">
+    <h4>Upgrade to premium!</h4>
+    <p>Premium membership is just $5 a month and includes unlimited wikis and collaborators.</p>
+    <ul>
+      <li>Create Unlimited private wikis.</li>
+      <li>Collaborate with friends around the world.</li>
+      <li>Use markdown to style your wikis.</li>
+      <li>Cancel at anytime.</li>
+    </ul>
+    <% if user_signed_in? && current_user.role == 'standard' %>
+      <%= form_tag charges_path do %>
+          <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
       <% end %>
-      <label class="amount">
-        <span>Amount: $5.00</span>
-      </label>
-    </article>
+    <% else if user_signed_in? && current_user.role == 'premium' %>
+      <p><strong>Congrats! You are already a premium member. To change your membership click: <br> <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn' %> </strong></p>
+    <% else %>
+      <p><strong>Please set up your account before upgrading</strong></p>
+      <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-lg'  %>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col-sm-6">
 
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description="A month's subscription"
-            data-amount="500"
-            data-locale="auto"></script>
-<% end %>
+  </div>
+</div>

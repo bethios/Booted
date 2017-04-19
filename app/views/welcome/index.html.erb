@@ -7,10 +7,10 @@
 <div class="row">
   <div class="col-sm-6 features" >
     <h3 class="feature-heading">Create as many public <br> wikis as you want!</h3>
-    <button class="btn btn-lg feature-btn">Free Plan</button>
+    <%= link_to "Free Plan", new_user_registration_path, :class => 'btn btn-lg' %>
   </div>
   <div class="col-sm-6 features" >
     <h3 class="feature-heading">Create your own <br>private wikis! </h3>
-    <button class="btn btn-lg">Premium Plan</button>
+    <%= link_to "Go Premium", new_charge_path, :class => 'btn btn-lg' %>
   </div>
 </div>

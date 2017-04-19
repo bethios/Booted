@@ -40,10 +40,18 @@
   </div>
 
   <div class="col-sm-6">
+    <h2>Your Account</h2>
+    <p>Account type:<strong> <%=current_user.role%> </strong></p>
+
+    <% if user_signed_in? && current_user.role == 'standard' %>
+      <%= link_to "Upgrade to Premium", new_charge_path, :class => 'btn' %>
+    <% else if user_signed_in? && current_user.role == 'premium' %>
+      <%= link_to "Downgrade Account", downgrade_path, data: { confirm: "Are you sure? All Private wikis will be deleted" }, :class => 'btn' %>
+    <% end %>
+    <% end %>
+
     <h2>Cancel my account</h2>
-
     <p>Unhappy with Blocipedia? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn"  %></p>
-
     <%= link_to "Back", :back %>
 
   </div>

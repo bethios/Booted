@@ -1,56 +1,49 @@
 class ChargesController < ApplicationController
   def new
-
+    @stripe_btn_data = {
+        key: "#{ Rails.configuration.stripe[:publishable_key]}",
+        description: "Premium Membership - #{current_user.email}",
+        amount: 5_00
+    }
   end
 
   def create
-    @amount = 500
+    #plan = Stripe::Plan.create(
+    #    :name => "Premium Plan",
+    #    :id => "premium-monthly",
+    #    :interval => "month",
+    #    :currency => "usd",
+    #    :amount => 5_00
+    #)
+
+    @amount = 5_00
 
     customer = Stripe::Customer.create(
-      :email => params[:stripeEmail],
+      :email => current_user.email,
       :source => params[:stripeToken]
     )
 
-    charge = Stripe::Charge.create(
-      :customer => customer.id,
-      :amount => @amount,
-      :description => 'Premium Wiki Account',
-      :currentcy => 'usd'
+    subscription = Stripe::Subscription.create(
+        :customer => customer.id,
+        :plan => "premium-monthly",
     )
+    current_user.update_attributes(stripe_id: customer.id)
+    current_user.update_attributes(stripe_subscription: subscription.id)
+    current_user.update_attributes(role: 'premium')
 
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to new_charge_path
+    flash[:notice] = "Welcome to premium, #{current_user.email}! Start creating private wikis today."
+    redirect_to wikis_path
+
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to new_charge_path
   end
 
-  #def create
-  #  customer = Stripe::Customer.create(
-  #      email: current_user.email,
-  #      card: params[:stripeToken]
-  #  )
-
-  #  charge = Stripe::Charge.create(
-  #      customer: customer.id,
-  #      amount: 5_00,
-  #      description: "Premium Membership - #{current_user.email}",
-  #      currency: 'usd'
-  #  )
-
-  #  flash[:notice] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
-  #  current_user.role = 'premium'
-  #  redirect_to user_path(current_user)
-
-  #rescue Stripe::CardError => e
-  #  flash[:alert] = e.message
-  #  redirect_to root_path
-  #end
-  #end
-
-  #def new
-  #  @stripe_btn_data = {
-  #      key: "pk_test_GztYaP7l7fjYW4rAXfn5hN4Q",
-  #      description: "Premium Membership - #{current_user.email}",
-  #      amount: 5_00
-  #  }
-  #end
+  def delete
+    customer = Stripe::Customer.retrieve(current_user.stripe_id)
+    subscription = Stripe::Subscription.retrieve(current_user.stripe_subscription )
+    subscription.delete
+    current_user.update_attributes(role: 'standard')
+    redirect_to edit_user_registration_path
+  end
 end
