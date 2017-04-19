@@ -45,5 +45,6 @@ class ChargesController < ApplicationController
     subscription.delete
     current_user.update_attributes(role: 'standard')
     redirect_to edit_user_registration_path
+    flash[:notice] = "Membership level changed to standard. Remember, you can upgrade at anytime."
   end
 end

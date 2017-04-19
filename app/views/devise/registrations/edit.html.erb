@@ -46,7 +46,7 @@
     <% if user_signed_in? && current_user.role == 'standard' %>
       <%= link_to "Upgrade to Premium", new_charge_path, :class => 'btn' %>
     <% else if user_signed_in? && current_user.role == 'premium' %>
-      <%= link_to "Downgrade Account", downgrade_path, data: { confirm: "Are you sure? All Private wikis will be deleted" }, :class => 'btn' %>
+      <%= link_to "Downgrade Account", downgrade_path, data: { confirm: "Are you sure? All Private wikis will be inaccessible" }, :class => 'btn' %>
     <% end %>
     <% end %>
 
