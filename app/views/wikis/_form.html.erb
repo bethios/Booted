@@ -1,5 +1,5 @@
 <div class="content container">
-  <div class="col-sm-6">
+  <div class="col-md-6">
     <h2>Edit Wiki:</h2>
     <%= form_for @wiki do |f| %>
         <div class="form-group">
@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
           <%= f.label :body %>
-          <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki contents"  %>
+          <%= f.text_area :body, rows: 9, class: 'form-control', placeholder: "Enter wiki contents"  %>
         </div>
         <div class="form-group">
           <%= f.submit "Preview Wiki", class:'btn btn-success' %>
@@ -21,9 +21,44 @@
             </div>
         <% end %>
     <% end %>
+    <table>
+      <tr>
+        <th>Style</th>
+        <th>Markdown Syntax</th>
+      </tr>
+      <tr>
+        <td>Autolink</td>
+        <td>< ></td>
+      </tr>
+      <tr>
+        <td>Bold</td>
+        <td>**word**</td>
+      </tr>
+      <tr>
+        <td>Heading</td>
+        <td>###heading</td>
+      </tr>
+      <tr>
+        <td>Small Heading</td>
+        <td>####heading</td>
+      </tr>
+      <tr>
+        <td>Image</td>
+        <td>![](url)</td>
+      </tr>
+      <tr>
+        <td>Italics</td>
+        <td>_word_</td>
+      </tr>
+      <tr>
+        <td>Bullet List</td>
+        <td>* or -</td>
+      </tr>
+
+    </table>
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-md-6">
     <h2>Preview Wiki:</h2>
     <div class="wiki-preview">
       <h3><%= @wiki.title %></h3>

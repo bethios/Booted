@@ -5,5 +5,27 @@
 }
 
 .content {
-  margin: 60px;
+  margin: 1vw;
+}
+
+table{
+  width: 100%;
+}
+
+td, th{
+  text-align: left;
+  padding: 12px;
+  font-size: 120%
+}
+
+tr:nth-child(even){
+  background-color: #dddddd;
+}
+
+.wiki-preview{
+  border: .5px solid lightgrey;
+  padding-left: 20px;
+  border-radius: 2%;
+  height: 70vh;
+  overflow: scroll;
 }
