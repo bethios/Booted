@@ -1,9 +1,11 @@
 class WikisController < ApplicationController
   def index
+    @user = current_user
     @wikis = Wiki.all
   end
 
   def show
+    @user = current_user
     @wiki = Wiki.find(params[:id])
   end
 
@@ -19,6 +21,8 @@ class WikisController < ApplicationController
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:private]
+    @wiki.user = current_user
 
     if @wiki.save
       flash[:notice] = "Wiki was saved!"
@@ -33,6 +37,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:private]
 
     if @wiki.save
       flash[:notice] = "Wiki was updated"
@@ -44,6 +49,7 @@ class WikisController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     @wiki = Wiki.find(params[:id])
 
     if @wiki.destroy
@@ -53,6 +59,7 @@ class WikisController < ApplicationController
       flash.now[:alert] = "There was an error deleting the wiki."
       render :show
     end
+
   end
 
 end
