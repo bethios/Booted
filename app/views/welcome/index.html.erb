@@ -2,9 +2,12 @@
   <div class="banner">
     <h1><strong>Booted:</strong></h1>
     <h2>A wiki for coding bootcamp students and grads</h2>
-    <p><strong>Suplement skills missing from your bootcamp education, brush up on interview techniques and share advice.</strong> </p>
+    <p><strong>Supplement skills missing from your bootcamp education, brush up on interview techniques and share advice.</strong> </p>
     <% if user_signed_in? == false %>
       <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-lg'  %>
+    <% else if current_user.role == 'standard'%>
+      <%= link_to "Go Premium", new_charge_path, :class => 'btn btn-primary btn-lg' %>
+    <% end %>
     <% end %>
   </div>
 </div>
