@@ -11,21 +11,10 @@
 <nav class="navbar navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to "Blocipedia", root_path, class: 'navbar-brand' %>
+      <%= link_to "Booted", root_path, class: 'navbar-brand' %>
     </div>
     <ul class="nav navbar-nav">
-      <% if user_signed_in? && current_user.role == 'premium' %>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Wikis
-              <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Wikis", wikis_path %></li>
-              <li>My Wikis</li>
-            </ul>
-          </li>
-      <% else %>
-          <li><%= link_to "Wiki", wikis_path %> </li>
-      <% end %>
+      <li><%= link_to "Wikis", wikis_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>

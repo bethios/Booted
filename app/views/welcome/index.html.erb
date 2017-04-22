@@ -1,16 +1,24 @@
-<div class="banner">
-  <h1>Blocipedia: Social, Markdown Wikis</h1>
-  <h2>Create and share Markdown Wikis</h2>
-  <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-lg'  %>
+<div class="jumbotron" id="jumbotron">
+  <div class="banner">
+    <h1><strong>Booted:</strong></h1>
+    <h2>A wiki for coding bootcamp students and grads</h2>
+    <p><strong>Suplement skills missing from your bootcamp education, brush up on interview techniques and share advice.</strong> </p>
+    <% if user_signed_in? == false %>
+      <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-lg'  %>
+    <% end %>
+  </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-6 features" >
-    <h3 class="feature-heading">Create as many public <br> wikis as you want!</h3>
-    <%= link_to "Free Plan", new_user_registration_path, :class => 'btn btn-lg' %>
-  </div>
-  <div class="col-sm-6 features" >
-    <h3 class="feature-heading">Create your own <br>private wikis! </h3>
-    <%= link_to "Go Premium", new_charge_path, :class => 'btn btn-lg' %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 features" >
+      <h3 class="feature-heading">Create and contribute<br>to public wikis.</h3>
+      <%= link_to "Free Plan", new_user_registration_path, :class => 'btn btn-lg' %>
+    </div>
+    <div class="col-sm-6 features" >
+      <h3 class="feature-heading">Create and collaborate with<br>peers in private wikis! </h3>
+      <%= link_to "Go Premium", new_charge_path, :class => 'btn btn-lg' %>
+    </div>
   </div>
 </div>
+

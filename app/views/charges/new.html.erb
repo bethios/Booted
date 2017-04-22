@@ -15,7 +15,7 @@
     <% else if user_signed_in? && current_user.role == 'premium' %>
       <p><strong>Congrats! You are already a premium member. To change your membership click: <br> <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn' %> </strong></p>
     <% else %>
-      <p><strong>Please set up your account before upgrading</strong></p>
+      <p><strong>Please create an account before upgrading.</strong></p>
       <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-lg'  %>
     <% end %>
     <% end %>

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-md-6">
-    <h2>Edit Wiki:</h2>
+    <h2>Wiki:</h2>
     <%= form_for @wiki do |f| %>
         <div class="form-group">
           <%= f.label :title %>
@@ -54,18 +54,23 @@
         <td>Bullet List</td>
         <td>* or -</td>
       </tr>
-
+      <tr>
+        <td>Numbered List</td>
+        <td>1. 2. 3.</td>
+      </tr>
     </table>
   </div>
 
   <div class="col-md-6">
-    <h2>Preview Wiki:</h2>
-    <div class="wiki-preview">
-      <h3><%= @wiki.title %></h3>
-      <p>Last Updated <%= @wiki.updated_at %></p>
-      <p><%= markdown(@wiki.body) %></p>
-    </div>
-    <button class="btn"> <%= link_to "Finish Editing", wikis_path %></button>
+    <% if @wiki.title && @wiki.body %>
+      <h2>Preview Wiki:</h2>
+      <div class="wiki-preview">
+        <h3><%= @wiki.title %></h3>
+        <p>Last Updated <%= @wiki.updated_at %></p>
+        <p><%= markdown(@wiki.body) %></p>
+      </div>
+      <button class="btn"> <%= link_to "Finish Editing", wikis_path %></button>
+    <% end %>
   </div>
 </div>
 
