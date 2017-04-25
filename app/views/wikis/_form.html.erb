@@ -10,16 +10,32 @@
           <%= f.label :body %>
           <%= f.text_area :body, rows: 9, class: 'form-control', placeholder: "Enter wiki contents"  %>
         </div>
+        <% if user_signed_in? && (current_user.role == 'premium' || current_user.role == 'admin') %>
+            <div class="form-group">
+              <%= f.label :private, class: 'checkbox' do %>
+              <%= f.check_box :private, id: 'private' %> Make Wiki Private
+              <% end %>
+            </div>
+         <% end %>
         <div class="form-group">
           <%= f.submit "Preview Wiki", class:'btn btn-success' %>
         </div>
         <% if user_signed_in? && (current_user.role == 'premium' || current_user.role == 'admin') %>
-            <div class="form-group">
-              <%= f.label :private, class: 'checkbox' do %>
-                  <%= f.check_box :private %> Make Wiki Private
-              <% end %>
-            </div>
+            <%= render partial: 'collaborators/form', locals: {wiki_id: @wiki.id} %>
         <% end %>
+    <% end %>
+    <p>collaborators <%=@wiki.collaborators.count%></p>
+  </div>
+
+  <div class="col-md-6">
+    <% if @wiki.title && @wiki.body %>
+      <h2>Preview Wiki:</h2>
+      <div class="wiki-preview">
+        <h3><%= @wiki.title %></h3>
+        <p>Last Updated <%= @wiki.updated_at %></p>
+        <p><%= markdown(@wiki.body) %></p>
+      </div>
+      <button class="btn"> <%= link_to "Finish Editing", wikis_path %></button>
     <% end %>
     <table>
       <tr>
@@ -59,18 +75,6 @@
         <td>1. 2. 3.</td>
       </tr>
     </table>
-  </div>
-
-  <div class="col-md-6">
-    <% if @wiki.title && @wiki.body %>
-      <h2>Preview Wiki:</h2>
-      <div class="wiki-preview">
-        <h3><%= @wiki.title %></h3>
-        <p>Last Updated <%= @wiki.updated_at %></p>
-        <p><%= markdown(@wiki.body) %></p>
-      </div>
-      <button class="btn"> <%= link_to "Finish Editing", wikis_path %></button>
-    <% end %>
   </div>
 </div>
 

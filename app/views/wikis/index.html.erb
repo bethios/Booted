@@ -4,6 +4,7 @@
   <% if current_user && current_user.role == 'premium' %>
     <div>
     <h2>My Private Wiki</h2>
+      <p>count <%=@user.wikis.count %></p>
       <% if @user.wikis.count >= 1 %>
         <% @user.wikis.each do |wiki| %>
             <% if wiki.private %>

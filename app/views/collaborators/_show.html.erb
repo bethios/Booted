@@ -1,0 +1,8 @@
+<% if @wiki.user_id == current_user.id && @wiki.user.role == 'premium'|| current_user.role == "admin" && @wiki.collaborators.count >= 1  %>
+  <%= @wiki.collaborators.user_id do |user_id| %>
+    <p>#{User.find_by_id(user_id).email}</p>
+    <%= link_to [wiki, collaborator], class: 'btn btn-danger', method: :delete do %>
+      <i class="glyphicon glyphicons-delete"></i>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  resources :collaborators
+
   devise_for :users
 
   get '/charges', to: 'charges#delete', as: :downgrade
