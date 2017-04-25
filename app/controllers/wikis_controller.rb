@@ -6,7 +6,7 @@ class WikisController < ApplicationController
 
   def show
     @user = current_user
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
   end
 
   def new
@@ -14,7 +14,7 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
   end
 
   def create
@@ -35,7 +35,7 @@ class WikisController < ApplicationController
   end
 
   def update
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
@@ -51,7 +51,7 @@ class WikisController < ApplicationController
 
   def destroy
     @user = current_user
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."

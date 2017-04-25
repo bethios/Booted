@@ -36,3 +36,5 @@ gem 'devise'
 gem 'pundit'
 gem 'stripe'
 gem 'redcarpet'
+gem 'friendly_id', '~> 5.1.0'
+
