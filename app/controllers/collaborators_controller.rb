@@ -1,47 +1,44 @@
 class CollaboratorsController < ApplicationController
   before_action :set_wiki
-
-  def new
-    @collaborator = Collaborator.new
-  end
+  before_action :require_sign_in
+  before_action :authorize_user
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
-    @collaborator = @wiki.collaborator.new(collaborator_params)
-    @collaborator.user_id = User.find_by_email(params[:collaborators][:user]).id
+    wiki = Wiki.find(params[:wiki_id])
+    newCollaborator = User.find_by_email(params[:collaborators][:user])
+    collaborator = newCollaborator.collaborators.build(wiki: wiki)
 
-    if @collaborator.save
-      flash[:notice] = "Collaborators saved!"
-      redirect_to :back
+    if collaborator.save
+      flash[:notice] = "Collaborator #{:user} saved!"
     else
       flash.now[:alert] = "There was an error saving your collaborators, please try again."
-      render :new
     end
+
+    redirect_to wiki
   end
 
   def destroy
-    @collaborator = Collaborator.find(params[:id])
+    wiki = Wiki.find(params[:wiki_id])
+    oldCollaborator = User.find_by_email(params[:collaborators][:user])
+    collaborator = oldCollaborator.collaborators.find(params[:id])
 
-    if @collaborator.destroy
-      flash[:notice] = "\"#{@collaborator.user.email}\" was removed successfully."
-      redirect_to wikis_path
+    if collaborator.destroy
+      flash[:notice] = "#{oldCollaborator} was removed successfully."
+      redirect_to :back
     else
       flash.now[:alert] = "There was an error deleting the collaborators."
       render :show
     end
   end
 
-  def index
-    @collaborator = Collaborator.all
-  end
-
-  def show
-    @collaborator = Collaborator.find(params[:id])
-  end
-
   private
 
-  def collaborator_params
-    params.require(:collaborators).permit(:user)
+  def authorize_user
+    wiki = Wiki.find(params[:id])
+    unless current_user == wiki.user && current_user.role == 'premium' || current_user.role == 'admin'
+      flash[:alert] = "You do not have permission to add or delete collaborators"
+      redirect_to wiki_path
+    end
   end
+
 end

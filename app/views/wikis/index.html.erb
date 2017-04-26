@@ -5,7 +5,7 @@
     <div>
     <h2>My Private Wiki</h2>
       <p>count <%=@user.wikis.count %></p>
-      <% if @user.wikis.count >= 1 %>
+      <% if @user.wikis.count >= 1 && wiki.user != current_user %>
         <% @user.wikis.each do |wiki| %>
             <% if wiki.private %>
               <p><%= link_to wiki.title, wiki %></p>

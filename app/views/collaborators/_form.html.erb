@@ -1,11 +1,14 @@
-<% if user_signed_in? && current_user.role == 'premium' %>
-    <%= form_for [@wiki] do |f| %>
-        <div class="form-group">
-          <%= f.label :user %>
-          <%= f.text_field :user, class: 'form-control', placeholder: "Collaborator's email" %>
-        </div>
-        <div class="form-group">
-          <%= f.submit "Save Collaborator", class:'btn btn-success' %>
-        </div>
-    <% end %>
-<% end %>
+<div>
+    <% if user_signed_in? && current_user.role == 'premium' %>
+        <%= form_for Collaborator.new do |f| %>
+            <div class="form-group">
+              <h4>Add Collaborator by Email Address</h4>
+              <%= f.label :user, class: 'sr-only' %>
+              <%= f.text_field :user, class: 'form-control', placeholder: "Collaborator's email" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit "Save Collaborator", class:'btn btn-success' %>
+            </div>
+        <% end %>
+      <% end %>
+</div>
