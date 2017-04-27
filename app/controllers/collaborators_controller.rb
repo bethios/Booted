@@ -1,12 +1,11 @@
 class CollaboratorsController < ApplicationController
-  before_action :set_wiki
   before_action :require_sign_in
   before_action :authorize_user
 
   def create
-    wiki = Wiki.find(params[:wiki_id])
-    newCollaborator = User.find_by_email(params[:collaborators][:user])
-    collaborator = newCollaborator.collaborators.build(wiki: wiki)
+    @wiki = Wiki.find(params[:wiki_id])
+    @user.User.where(email: params[:user])
+    collaborator = @wiki.collaborators.build(user_id: @user.id)
 
     if collaborator.save
       flash[:notice] = "Collaborator #{:user} saved!"
@@ -18,9 +17,8 @@ class CollaboratorsController < ApplicationController
   end
 
   def destroy
-    wiki = Wiki.find(params[:wiki_id])
-    oldCollaborator = User.find_by_email(params[:collaborators][:user])
-    collaborator = oldCollaborator.collaborators.find(params[:id])
+    @collaborator = Collaborator.find(params[:id])
+    @wiki = @collaborator.wiki
 
     if collaborator.destroy
       flash[:notice] = "#{oldCollaborator} was removed successfully."

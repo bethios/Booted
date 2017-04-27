@@ -1,6 +1,6 @@
 <div>
     <% if user_signed_in? && current_user.role == 'premium' %>
-        <%= form_for Collaborator.new do |f| %>
+        <%= form_for [Collaborator.new] do |f| %>
             <div class="form-group">
               <h4>Add Collaborator by Email Address</h4>
               <%= f.label :user, class: 'sr-only' %>
@@ -11,4 +11,11 @@
             </div>
         <% end %>
       <% end %>
+    <p>Current Collaborators <%= @wiki.collaborators.count %></p>
+    <% @wiki.collaborators.each do |collaborator| %>
+      <%= collaborator.user.email %>
+      <% if @wiki.user == current_user %>
+        <%= link_to "", [collaborator], method: delete, class: 'glyphicon glyphicon-ok' %>
+      <% end %>
+    <% end %>
 </div>
