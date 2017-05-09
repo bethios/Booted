@@ -2,26 +2,33 @@ class CollaboratorsController < ApplicationController
   before_action :require_sign_in
   before_action :authorize_user
 
+  def new
+    @wiki = Wiki.find(params[:id])
+    @collaborator = Collaborator.new
+  end
+
   def create
     @wiki = Wiki.find(params[:wiki_id])
-    @user.User.where(email: params[:user])
-    collaborator = @wiki.collaborators.build(user_id: @user.id)
+    @user = User.where(email: params[:user])
 
-    if collaborator.save
+    @collaborator = @wiki.collaborator.build(user: @user)
+
+    if @collaborator.save
       flash[:notice] = "Collaborator #{:user} saved!"
     else
       flash.now[:alert] = "There was an error saving your collaborators, please try again."
     end
 
-    redirect_to wiki
+    redirect_to @wiki
   end
 
   def destroy
-    @collaborator = Collaborator.find(params[:id])
-    @wiki = @collaborator.wiki
+    @wiki = Wiki.find(params[:wiki_id])
+    @user = User.where(email: params[:user])
+    @collaborator = @user.collaborator.find(params[:id])
 
-    if collaborator.destroy
-      flash[:notice] = "#{oldCollaborator} was removed successfully."
+    if @collaborator.destroy
+      flash[:notice] = "#{@user.email} was removed successfully."
       redirect_to :back
     else
       flash.now[:alert] = "There was an error deleting the collaborators."

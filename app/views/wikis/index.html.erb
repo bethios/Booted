@@ -1,27 +1,13 @@
 <div class="container">
   <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
 
-  <% if current_user && current_user.role == 'premium' %>
-    <div>
-    <h2>My Private Wiki</h2>
-      <p>count <%=@user.wikis.count %></p>
-      <% if @user.wikis.count >= 1 && wiki.user == current_user %>
-        <% @user.wikis.each do |wiki| %>
-            <% if wiki.private %>
-              <p><%= link_to wiki.title, wiki %></p>
-            <% end %>
-        <% end %>
-      <% else %>
-        <p>You haven't created any private wikis yet!</p>
-      <% end %>
-    </div>
-  <% end %>
-  <br>
   <h2>Public Wikis</h2>
   <div class="newspaper">
     <% @wikis.each do |wiki| %>
         <% if wiki.private == false %>
             <p><%= link_to wiki.title, wiki %></p>
+        <% else %>
+            <p><%= link_to wiki.title, wiki %> -- private</p>
         <% end %>
     <% end %>
   </div>

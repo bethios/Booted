@@ -4,7 +4,7 @@ class Wiki < ActiveRecord::Base
   after_initialize { self.private ||= false }
 
   has_many :collaborators, dependent: :destroy
-  has_many :users, through: :collaborators
+  #has_many :users, through: :collaborators
 
   extend FriendlyId
   friendly_id :title, use: :slugged
