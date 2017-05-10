@@ -1,8 +1,18 @@
-<% if @wiki.user_id == current_user.id && @wiki.user.role == 'premium'|| current_user.role == "admin" && @wiki.collaborators.count >= 1  %>
-  <%= @wiki.collaborators.user_id do |user_id| %>
-    <p>#{User.find_by_id(user_id).email}</p>
-    <%= link_to [wiki, collaborator], class: 'btn btn-danger', method: :delete do %>
-      <i class="glyphicon glyphicons-delete"></i>
-    <% end %>
+<div class="col-sm-6">
+  <% if @wiki.collaborators.count >= 1 && @wiki.user_id == current_user.id && @wiki.user.role == 'premium'|| current_user.role == "admin" %>
+  <h4>Current Collaborators, count: <%= @wiki.collaborators.count %></h4>
+  <ul class="list-of-collaborators">
+    <% @wiki.collaborators.each do |collaborator| %>
+    <li>
+      <%= User.find_by_id(collaborator.user_id).email %>
+      <%= link_to [@wiki, collaborator], class: 'btn btn-danger delete', method: :delete do %>
+          <i class="ion-ios-trash"></i>
+      <% end %>
+
+    </li>
+      <% end %>
+
+      </ul>
+
   <% end %>
-<% end %>
+</div>

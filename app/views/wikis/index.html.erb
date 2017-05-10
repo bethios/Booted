@@ -1,7 +1,7 @@
 <div class="container">
   <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
 
-  <h2>Public Wikis</h2>
+  <h2>Wikis</h2>
   <div class="newspaper">
     <% @wikis.each do |wiki| %>
         <% if wiki.private == false %>

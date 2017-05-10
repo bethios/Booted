@@ -1,4 +1,4 @@
-<div>
+<div class="col-sm-6">
     <% if user_signed_in? && current_user.role == 'premium' %>
         <%= form_for [wiki, Collaborator.new] do |f| %>
             <div class="form-group">
@@ -11,8 +11,5 @@
             </div>
         <% end %>
       <% end %>
-    <p>Current Collaborators <%= @wiki.collaborators.count %></p>
-    <% @wiki.collaborators.each do |collaborator| %>
-      <%= collaborator.user_id%>
-    <% end %>
+
 </div>

@@ -7,27 +7,32 @@ class CollaboratorsController < ApplicationController
 
   def create
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @user = User.find_by_email(params[:user])
+    @user = User.find_by_email(params[:collaborator][:user])
 
-    @collaborator = @wiki.collaborators.new(user_id: @user.id, wiki_id: @wiki.id)
+    if User.exists?(@user)
+      @collaborator = @wiki.collaborators.new(user_id: @user.id, wiki_id: @wiki.id)
 
-    if @collaborator.save
-      flash[:notice] = "Collaborator #{:user} saved!"
+      if @collaborator.save
+        flash[:notice] = "Collaborator #{:user} saved!"
+      else
+        flash.now[:alert] = "There was an error saving your collaborators, please try again."
+      end
+      redirect_to :back
+
     else
-      flash.now[:alert] = "There was an error saving your collaborators, please try again."
+      flash[:alert] = "Collaborator Save Failure! That user doesn't have a Booted Account at this time"
+      redirect_to :back
     end
 
-    redirect_to @wiki
   end
 
   def destroy
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @user = User.where(email: params[:user])
-    @collaborator = @user.collaborator.find(params[:id])
+    @collaborator = Collaborator.find(params[:id])
 
     if @collaborator.destroy
-      flash[:notice] = "#{@user.email} was removed successfully."
-      redirect_to :back
+      flash[:notice] = "Collaborator was removed successfully."
+      redirect_to @wiki
     else
       flash.now[:alert] = "There was an error deleting the collaborators."
       render :show
