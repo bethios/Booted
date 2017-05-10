@@ -6,13 +6,13 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
-  resources :collaborators
-
   get '/charges', to: 'charges#delete', as: :downgrade
 
   resources :charges, only: [:new, :create, :delete]
 
-  resources :wikis
+  resources :wikis do
+    resources :collaborators
+  end
 
   get 'about' => 'welcome#about'
 

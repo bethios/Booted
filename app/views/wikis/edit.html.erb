@@ -1,5 +1,7 @@
 <div class="content">
   <%= render 'form' %>
-
+  <% if user_signed_in? && @wiki.private %>
+      <%= render partial: 'collaborators/form', locals: { wiki: @wiki } %>
+  <% end %>
 </div>
 

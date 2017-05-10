@@ -16,9 +16,6 @@
               <%= f.check_box :private, id: 'private' %> Make Wiki Private
               <% end %>
             </div>
-            <% if user_signed_in? && @wiki.private %>
-                <%= render partial: 'collaborators/form', locals: { wiki: @wiki } %>
-            <% end %>
          <% end %>
         <div class="form-group">
           <%= f.submit "Preview Wiki", class:'btn btn-success' %>

@@ -1,17 +1,15 @@
 class CollaboratorsController < ApplicationController
-  before_action :require_sign_in
   before_action :authorize_user
 
   def new
-    @wiki = Wiki.find(params[:id])
     @collaborator = Collaborator.new
   end
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
-    @user = User.where(email: params[:user])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @user = User.find_by_email(params[:user])
 
-    @collaborator = @wiki.collaborator.build(user: @user)
+    @collaborator = @wiki.collaborators.new(user_id: @user.id, wiki_id: @wiki.id)
 
     if @collaborator.save
       flash[:notice] = "Collaborator #{:user} saved!"
@@ -23,7 +21,7 @@ class CollaboratorsController < ApplicationController
   end
 
   def destroy
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     @user = User.where(email: params[:user])
     @collaborator = @user.collaborator.find(params[:id])
 
@@ -39,7 +37,7 @@ class CollaboratorsController < ApplicationController
   private
 
   def authorize_user
-    wiki = Wiki.find(params[:id])
+    wiki = Wiki.friendly.find(params[:wiki_id])
     unless current_user == wiki.user && current_user.role == 'premium' || current_user.role == 'admin'
       flash[:alert] = "You do not have permission to add or delete collaborators"
       redirect_to wiki_path
