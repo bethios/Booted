@@ -1,3 +1,0 @@
-##Blocipedia
-
-![Blocipedia preview]['../app/images/booted(iPad).png']
