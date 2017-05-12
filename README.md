@@ -1,5 +1,5 @@
 # Booted 
-##A wiki for coding bootcamp students and grads
+## A wiki for coding bootcamp students and grads
 
 Booted is a Ruby on Rails application that allows recent bootcamp grads to supplement skills missing from their bootcamp education, 
 brush up on interview techniques and share advice.  Users can upgrade to premium membership which will allow them to 
@@ -10,7 +10,7 @@ This app is deployed on Heroku: https://booted-resource.herokuapp.com/
 
 The source code is available, here, on github: https://github.com/bethios/Booted
 
-##Features
+## Features
 - Users can sign up for an account (via the Devise gem), receive a confirmation email, retrieve and change their passwords.
 - Users can view, edit and create public wikis using markdown syntax (via the RedCarpet gem). 
 - Users can upgrade to premium membership (via the Stripe gem). 
@@ -19,12 +19,12 @@ The source code is available, here, on github: https://github.com/bethios/Booted
 - Premium members can downgrade their account to standard. 
 
 
-### Setup and Configuration
-**Ruby v. 2.3.3
-**Rails v. 4.2.8
-**Databases: SQLite (Test, Development), PostgreSQL (Production)
+## Setup and Configuration
+** Ruby v. 2.3.3 **
+** Rails v. 4.2.8 **
+** Databases:** SQLite (Test, Development), PostgreSQL (Production)
 
-**Gems Used: 
+** Gems Used: ** 
 - Devise, User Authentication
 - Faker, Seed Database
 - Factory Girl, Development
@@ -37,13 +37,13 @@ The source code is available, here, on github: https://github.com/bethios/Booted
 - RedCarpet, Markdown syntax
 - Friend ID, Human URLs
 
-**Set-up:
+** Set-up: **
 - Environmental variables were secured using Figaro and are stored in config/application.yml (ignored by github)
 - The config/application.example.yml illustrates the formatting for environmental variables.
 
-**To run Booted locally:
+** To run Booted locally: **
 - Clone the repository
 - Run bundle install
 - Create and migrate the SQLite database with rake db:create and rake db:migrate
-- Start the server using rails server
+- Start the server using rails s
 - Run the app on localhost:3000
