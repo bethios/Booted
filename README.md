@@ -20,11 +20,11 @@ The source code is available, here, on github: https://github.com/bethios/Booted
 
 
 ## Setup and Configuration
-** Ruby v. 2.3.3 **
-** Rails v. 4.2.8 **
-** Databases:** SQLite (Test, Development), PostgreSQL (Production)
+**Ruby v. 2.3.3**
+**Rails v. 4.2.8**
+**Databases:** SQLite (Test, Development), PostgreSQL (Production)
 
-** Gems Used: ** 
+**Gems Used:** 
 - Devise, User Authentication
 - Faker, Seed Database
 - Factory Girl, Development
@@ -37,11 +37,11 @@ The source code is available, here, on github: https://github.com/bethios/Booted
 - RedCarpet, Markdown syntax
 - Friend ID, Human URLs
 
-** Set-up: **
+**Set-up:**
 - Environmental variables were secured using Figaro and are stored in config/application.yml (ignored by github)
 - The config/application.example.yml illustrates the formatting for environmental variables.
 
-** To run Booted locally: **
+**To run Booted locally:**
 - Clone the repository
 - Run bundle install
 - Create and migrate the SQLite database with rake db:create and rake db:migrate
